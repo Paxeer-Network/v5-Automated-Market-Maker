@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/introduction
+      link: /guide/architecture
     - theme: alt
       text: API Reference
       link: /api/pool-facet
