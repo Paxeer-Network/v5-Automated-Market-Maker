@@ -11,7 +11,7 @@
     "migrate:down": "ts-node src/utils/migrate-down.ts"
   },
   "dependencies": {
-    "@apollo/server": "^4.11.0",
+    "@apollo/server": "^5.4.0",
     "ethers": "^6.13.4",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
