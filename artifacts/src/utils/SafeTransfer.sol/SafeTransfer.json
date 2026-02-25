@@ -1,0 +1,26 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "SafeTransfer",
+  "sourceName": "src/utils/SafeTransfer.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ApproveFailed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TransferFailed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TransferFromFailed",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212202a176489facd62b94da5622678828865b3c10ac62b50bb24e40ad095136c624d64736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea26469706673582212202a176489facd62b94da5622678828865b3c10ac62b50bb24e40ad095136c624d64736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

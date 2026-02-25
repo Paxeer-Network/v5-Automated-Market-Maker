@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "eqeqeq": "error"
+  },
+  "ignorePatterns": [
+    "artifacts/",
+    "cache/",
+    "out/",
+    "node_modules/",
+    "typechain-types/",
+    "coverage/"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@paxeer-network/v5-asamm/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the v5-ASAMM Protocol — typed contract interfaces, client, and deployment addresses",
+  "license": "GPL-3.0-only",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "abis",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "ethers": "^6.13.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "ethers": "^6.0.0"
+  },
+  "keywords": ["asamm", "amm", "defi", "paxeer", "diamond", "eip-2535", "sdk"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Paxeer-Network/v5-Automated-Market-Maker"
+  }
+}

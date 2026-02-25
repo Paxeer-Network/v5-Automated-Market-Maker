@@ -1,0 +1,31 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibSecurity",
+  "sourceName": "src/core/libraries/LibSecurity.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotPauseGuardian",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ProtocolPaused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrantCall",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220b426b257eb6f719ae1d0884451215871dfc3c02796634ccd9af9af710f6633c064736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220b426b257eb6f719ae1d0884451215871dfc3c02796634ccd9af9af710f6633c064736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

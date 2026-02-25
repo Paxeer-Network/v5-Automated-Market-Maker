@@ -1,0 +1,28 @@
+{
+  "name": "@paxeer-network/v5-asamm/indexer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "v5-ASAMM Protocol Event Indexer with GraphQL API — PostgreSQL + Redis for Railway",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "migrate": "ts-node src/utils/migrate.ts",
+    "migrate:down": "ts-node src/utils/migrate-down.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "ethers": "^6.13.4",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
+    "ioredis": "^5.4.1",
+    "pg": "^8.13.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/pg": "^8.11.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

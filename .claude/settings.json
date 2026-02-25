@@ -1,0 +1,10 @@
+{
+  "project": "v5-ASAMM Protocol",
+  "description": "Adaptive Sigmoid AMM for Paxeer Network with Diamond Standard architecture",
+  "instructions_file": "CLAUDE.md",
+  "context_files": [
+    "docs/ARCHITECTURE.md",
+    "docs/IMPLEMENTATION_PLAN.md",
+    "workspace_state.json"
+  ]
+}

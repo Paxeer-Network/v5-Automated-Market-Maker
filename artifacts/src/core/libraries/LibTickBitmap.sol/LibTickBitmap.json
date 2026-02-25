@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibTickBitmap",
+  "sourceName": "src/core/libraries/LibTickBitmap.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea264697066735822122059f12dcdbd65536febe1c0089675df68e563880cdb0c268fadfb1d91b2b7ebdb64736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea264697066735822122059f12dcdbd65536febe1c0089675df68e563880cdb0c268fadfb1d91b2b7ebdb64736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,0 +1,4 @@
+@core/=src/core/
+@periphery/=src/periphery/
+@tokens/=src/tokens/
+@utils/=src/utils/

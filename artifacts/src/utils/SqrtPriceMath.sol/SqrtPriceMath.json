@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "SqrtPriceMath",
+  "sourceName": "src/utils/SqrtPriceMath.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220b14b4f5b047d940ce0bbfdd10dc9200e5ef83e15997d5d1d7564b0617fc8615c64736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220b14b4f5b047d940ce0bbfdd10dc9200e5ef83e15997d5d1d7564b0617fc8615c64736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

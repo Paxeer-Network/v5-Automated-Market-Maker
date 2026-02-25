@@ -1,0 +1,10 @@
+*.sol linguist-language=Solidity
+*.ts linguist-language=TypeScript
+*.json linguist-language=JSON
+
+# Ensure consistent line endings
+* text=auto eol=lf
+*.sol text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.md text eol=lf

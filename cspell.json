@@ -1,0 +1,25 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "asamm", "sigmoid", "twap", "multicall",
+    "facet", "facets", "diamondcut", "loupe",
+    "periphery", "quoter", "autocompound",
+    "paxeer", "paxscan", "hardhat", "solhint",
+    "typechain", "ethers", "reentrancy",
+    "slippage", "uncheck", "calldata",
+    "struct", "keccak", "ecrecover",
+    "delegatecall", "staticcall", "selfdestruct",
+    "sqrt", "mulmod", "addmod", "sload", "sstore",
+    "mload", "mstore", "calldataload", "calldatasize",
+    "returndatasize", "returndatacopy"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "artifacts/**",
+    "cache/**",
+    "out/**",
+    "coverage/**",
+    "typechain-types/**"
+  ]
+}

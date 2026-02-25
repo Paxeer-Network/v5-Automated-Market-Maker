@@ -1,0 +1,46 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibOrder",
+  "sourceName": "src/core/libraries/LibOrder.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "InvalidExpiry",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MaxOrdersExceeded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotOrderOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OrderAlreadyFilled",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OrderDoesNotExist",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OrderNotActive",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OrderTooSmall",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220a180050ddf114808376d754a25fa9af5bf4ac496ba22edc55ae4f610ce31bcac64736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220a180050ddf114808376d754a25fa9af5bf4ac496ba22edc55ae4f610ce31bcac64736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

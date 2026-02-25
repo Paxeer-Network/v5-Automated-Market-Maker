@@ -1,0 +1,91 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "OwnershipFacet",
+  "sourceName": "src/core/diamond/OwnershipFacet.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_contractOwner",
+          "type": "address"
+        }
+      ],
+      "name": "NotContractOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080806040523460155761017c908161001b8239f35b600080fdfe608080604052600436101561001357600080fd5b60003560e01c9081638da5cb5b14610103575063f2fde38b1461003557600080fd5b346100fe5760203660031901126100fe576004356001600160a01b038116908190036100fe577fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320546001600160a01b03811690338290036100e5576001600160a01b03191682177fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a3005b5063ff4127cb60e01b6000523360045260245260446000fd5b600080fd5b346100fe5760003660031901126100fe577fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320546001600160a01b03168152602090f3fea2646970667358221220034ef80177f76baef4354355ef12905d2b705bc52fc9d0948f70cf586e6e468864736f6c634300081b0033",
+  "deployedBytecode": "0x608080604052600436101561001357600080fd5b60003560e01c9081638da5cb5b14610103575063f2fde38b1461003557600080fd5b346100fe5760203660031901126100fe576004356001600160a01b038116908190036100fe577fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320546001600160a01b03811690338290036100e5576001600160a01b03191682177fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a3005b5063ff4127cb60e01b6000523360045260245260446000fd5b600080fd5b346100fe5760003660031901126100fe577fc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c1320546001600160a01b03168152602090f3fea2646970667358221220034ef80177f76baef4354355ef12905d2b705bc52fc9d0948f70cf586e6e468864736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

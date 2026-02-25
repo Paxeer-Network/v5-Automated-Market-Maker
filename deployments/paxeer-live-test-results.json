@@ -1,0 +1,14 @@
+{
+  "network": "paxeer-network",
+  "chainId": 125,
+  "timestamp": "2026-02-25T03:30:10.525Z",
+  "diamond": "0x9595a92d63884d2D9924e0002D45C34d717DB291",
+  "poolId": "0x05e72cc1f564b8d452a624cd40fa096118af55e584894b1720d1f260b3773588",
+  "tokens": {
+    "token0": "0x227677FADDdc35B6E4432dA64A3f798E160f7B98",
+    "token1": "0xB5FB17a4c82DC17724E4b1604c6e674e38cF2511"
+  },
+  "passed": 23,
+  "failed": 0,
+  "total": 23
+}

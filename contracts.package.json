@@ -1,0 +1,35 @@
+{
+  "name": "@paxeer-network/v5-asamm/contracts",
+  "version": "0.1.0",
+  "description": "v5-ASAMM Protocol — Solidity contract ABIs, TypeChain types, and deployment addresses",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/v5-asamm/protocol.git"
+  },
+  "main": "typechain-types/index.js",
+  "types": "typechain-types/index.d.ts",
+  "files": [
+    "abi/**/*.json",
+    "typechain-types/**/*.js",
+    "typechain-types/**/*.d.ts",
+    "addresses.json",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "amm",
+    "defi",
+    "diamond",
+    "sigmoid",
+    "paxeer"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "ethers": "^6.0.0"
+  }
+}

@@ -1,0 +1,62 @@
+# v5-ASAMM Protocol
+
+> Adaptive Sigmoid Automated Market Maker -- a DeFi protocol featuring a tanh-based bonding curve with progressive quadratic fees, on-chain tick-aligned order book (limit/stop orders), oracle-pegged pools for wrapped assets, LP loyalty rewards, trader rebates, and EIP-2535 Diamond Standard upgradeability. Zero external Solidity dependencies.
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md): Full protocol design -- bonding curve math, fee model, incentive system, order book, Diamond facet map, storage layout, security model
+- [Implementation Plan](docs/IMPLEMENTATION_PLAN.md): 16-task phased build plan with file paths and test strategy
+- [Progress Report](docs/PROGRESS_REPORT.md): Current status, completed work, known limitations, next steps
+- [README](README.md): Quick start, project structure, network config, dev commands
+
+## Core Contracts
+
+- [AppStorage](src/core/storage/AppStorage.sol): Central Diamond storage struct -- pools, ticks, positions, orders, rewards, epochs
+- [Diamond](src/core/diamond/Diamond.sol): EIP-2535 proxy with fallback delegatecall routing
+- [LibDiamond](src/core/libraries/LibDiamond.sol): Facet cut logic, selector mapping, ownership
+- [LibSwap](src/core/libraries/LibSwap.sol): Sigmoid bonding curve swap math using tanh Padé approximant
+- [LibFee](src/core/libraries/LibFee.sol): Progressive quadratic fee calculation and distribution
+- [LibOrder](src/core/libraries/LibOrder.sol): Tick-aligned bucket order book data structures
+- [LibReward](src/core/libraries/LibReward.sol): LP loyalty multiplier (time + sqrt(volume)) and trader rebates
+- [LibOracle](src/core/libraries/LibOracle.sol): Internal TWAP ring buffer oracle
+
+## Facets
+
+- [SwapFacet](src/core/facets/SwapFacet.sol): Sigmoid curve swap execution with progressive fees
+- [LiquidityFacet](src/core/facets/LiquidityFacet.sol): Add/remove liquidity, fee collection
+- [PoolFacet](src/core/facets/PoolFacet.sol): Pool creation, initialization, pause/unpause
+- [OrderFacet](src/core/facets/OrderFacet.sol): Limit/stop order placement, cancellation, keeper execution
+- [OraclePegFacet](src/core/facets/OraclePegFacet.sol): External oracle connection for wrapped asset pools
+- [RewardFacet](src/core/facets/RewardFacet.sol): LP loyalty tiers, trader epoch rebates
+- [FlashLoanFacet](src/core/facets/FlashLoanFacet.sol): Uncollateralized flash loans
+
+## Periphery
+
+- [Router](src/periphery/Router.sol): Multi-hop swap routing with slippage/deadline protection
+- [Quoter](src/periphery/Quoter.sol): Off-chain quote simulation via staticcall
+- [PositionManager](src/periphery/PositionManager.sol): ERC-721 NFT LP position management
+- [OrderManager](src/periphery/OrderManager.sol): User-facing limit/stop order placement
+
+## Math Libraries
+
+- [FullMath](src/utils/FullMath.sol): 512-bit mulDiv for overflow-safe fixed-point arithmetic
+- [FixedPointMath](src/utils/FixedPointMath.sol): Q128.128 operations including tanh, sqrt
+- [TickMath](src/utils/TickMath.sol): Tick-to-sqrtPrice and sqrtPrice-to-tick conversions
+- [SqrtPriceMath](src/utils/SqrtPriceMath.sol): Token amount calculations from sqrt price deltas
+
+## Token Implementations
+
+- [ERC20](src/tokens/ERC20.sol): Custom ERC-20 with EIP-2612 permit
+- [ERC721](src/tokens/ERC721.sol): Custom ERC-721 for position NFTs
+- [ERC721Permit](src/tokens/ERC721Permit.sol): ERC-721 with EIP-4494 gasless approvals
+
+## Development
+
+- [Contributing](CONTRIBUTING.md): Dev setup, code standards, commit conventions
+- [Security](SECURITY.md): Vulnerability reporting, bug bounty program
+
+## Optional
+
+- [License](LICENSE.md): GPL-3.0 GNU General Public License v3.0
+- [Hardhat Config](hardhat.config.ts): Solidity 0.8.27, Paxeer Network config
+- [Foundry Config](foundry.toml): Forge compilation, fuzzing, formatting settings

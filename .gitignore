@@ -1,0 +1,77 @@
+# Compiler output
+cache/
+out/
+
+
+# Foundry
+cache_forge/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.p12
+*.keystore
+mnemonic.txt
+secret.txt
+private_key.txt
+workspace_state.json
+INITIAL.md
+.windsurf/workflows
+.windsurf/AGENT.md
+.windsurf/rules
+docs/IMPLEMENTATION_PLAN.md
+docs/PROGRESS_REPORT.md
+
+# Wallet / Key files
+keystore/
+.secret
+
+# Coverage
+coverage/
+coverage.json
+lcov.info
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+dist/
+build/
+
+# Gas reports
+gas-report.txt
+gas-report.json
+
+# Slither
+slither-report.json
+
+# Debug
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Deployment artifacts (keep deployments/ tracked, ignore temp)
+broadcast/
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

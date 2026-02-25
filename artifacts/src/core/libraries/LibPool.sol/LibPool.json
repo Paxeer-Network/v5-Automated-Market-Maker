@@ -1,0 +1,46 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibPool",
+  "sourceName": "src/core/libraries/LibPool.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "IdenticalTokens",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidTickSpacing",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidTokenOrder",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PoolAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PoolDoesNotExist",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PoolNotInitialized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea264697066735822122095277a4f07bd7158251cb13220bbeeed462d6fa607ba78d9bd777a0f5491f25d64736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea264697066735822122095277a4f07bd7158251cb13220bbeeed462d6fa607ba78d9bd777a0f5491f25d64736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,0 +1,21 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibFee",
+  "sourceName": "src/core/libraries/LibFee.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "FeeExceedsMaximum",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidFeeConfig",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea264697066735822122000e18110c2e067d604712c1f9c9d79797a1a512448aa6e9226992395ef01357464736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea264697066735822122000e18110c2e067d604712c1f9c9d79797a1a512448aa6e9226992395ef01357464736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

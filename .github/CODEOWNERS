@@ -1,0 +1,31 @@
+# v5-ASAMM Protocol Code Owners
+
+# Smart contracts — require review from core team
+/src/                   @paxeer-network/v5-asamm/core
+/test/                  @paxeer-network/v5-asamm/core
+
+# Diamond facets
+/src/core/facets/       @paxeer-network/v5-asamm/core
+/src/core/libraries/    @paxeer-network/v5-asamm/core
+
+# Periphery contracts
+/src/periphery/         @paxeer-network/v5-asamm/core
+
+# Deployment scripts
+/scripts/               @paxeer-network/v5-asamm/core
+
+# Indexer
+/indexer/               @paxeer-network/v5-asamm/backend
+
+# SDK
+/sdk/                   @paxeer-network/v5-asamm/sdk
+
+# Documentation
+/docs/                  @paxeer-network/v5-asamm/docs
+
+# CI/CD
+/.github/               @paxeer-network/v5-asamm/devops
+
+# Config files
+hardhat.config.ts       @paxeer-network/v5-asamm/core
+foundry.toml            @paxeer-network/v5-asamm/core

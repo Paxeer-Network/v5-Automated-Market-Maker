@@ -1,0 +1,55 @@
+# v5-ASAMM Protocol -- Cursor Rules
+
+## Project Context
+
+This is the v5-ASAMM (Adaptive Sigmoid Automated Market Maker) protocol for Paxeer Network (Chain ID: 125). It uses an EIP-2535 Diamond Standard architecture with 12 facets, a sigmoid bonding curve, progressive fees, and an on-chain order book.
+
+## Solidity
+
+- Compiler: 0.8.27 with optimizer (200 runs) and viaIR enabled
+- Zero external dependencies -- all Solidity is written from scratch (no OpenZeppelin, no Solmate)
+- Source directory: `src/`
+- All facets share a single `AppStorage` struct at a deterministic storage slot
+- NatSpec comments required on all public/external functions
+- 4-space indentation, 120-character line limit
+- Custom `ReentrancyGuard` using EIP-1153 transient storage
+
+## Architecture
+
+- **Core facets** (`src/core/facets/`): SwapFacet, LiquidityFacet, PoolFacet, FeeFacet, OracleFacet, OraclePegFacet, OrderFacet, RewardFacet, FlashLoanFacet
+- **Diamond infrastructure** (`src/core/diamond/`): Diamond proxy, DiamondCutFacet, DiamondLoupeFacet, OwnershipFacet, InitDiamond
+- **Libraries** (`src/core/libraries/`): LibDiamond, LibPool, LibSwap, LibFee, LibOracle, LibOrder, LibReward, LibPosition, LibSecurity, LibTransfer
+- **Periphery** (`src/periphery/`): Router, Quoter, PositionManager, OrderManager, PositionDescriptor, Multicall, SelfPermit
+- **Tokens** (`src/tokens/`): Custom ERC-20, ERC-721, ERC-721Permit
+
+## TypeScript
+
+- 2-space indentation, single quotes, strict mode
+- Test framework: Hardhat (Mocha/Chai) + Foundry
+- SDK at `/sdk` -- typed ethers v6 client
+- Indexer at `/indexer` -- Apollo GraphQL + PostgreSQL + Redis
+
+## Testing
+
+- Unit test every public function
+- Fuzz critical math (FullMath, FixedPointMath, LibFee, LibSwap)
+- Hardhat tests in `test/`, Foundry tests in `test/foundry/`
+
+## Key Formulas
+
+- Sigmoid curve: `P(x) = P_mid * (1 + k * tanh(a * x / L))`
+- Progressive fee: `fee(x) = baseFee + impactFee * (x/L)^2`
+- LP loyalty: `multiplier = time_factor * sqrt(volume_factor)`
+
+## Network
+
+- Paxeer Network, Chain ID 125
+- RPC: `https://public-rpc.paxeer.app/rpc`
+- Explorer: `https://paxscan.paxeer.app`
+
+## Do Not
+
+- Import external Solidity dependencies
+- Modify `AppStorage` struct layout without considering storage compatibility
+- Hardcode private keys or secrets
+- Skip NatSpec documentation on public functions

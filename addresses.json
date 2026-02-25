@@ -1,0 +1,16 @@
+{
+  "125": {
+    "name": "Paxeer Network",
+    "chainId": 125,
+    "contracts": {
+      "Diamond": "",
+      "Router": "",
+      "Quoter": "",
+      "PositionManager": "",
+      "OrderManager": "",
+      "PositionDescriptor": "",
+      "Multicall": "",
+      "EventEmitter": "0xA82e4ef34251C1B8CbC1E3F1d0675CBB906F2FA7"
+    }
+  }
+}

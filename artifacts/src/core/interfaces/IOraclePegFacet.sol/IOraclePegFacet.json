@@ -1,0 +1,192 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IOraclePegFacet",
+  "sourceName": "src/core/interfaces/IOraclePegFacet.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "reason",
+          "type": "string"
+        }
+      ],
+      "name": "CircuitBreakerTriggered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "OraclePegRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oracle",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint32",
+          "name": "twapPeriod",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint32",
+          "name": "maxStaleness",
+          "type": "uint32"
+        }
+      ],
+      "name": "OraclePegSet",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getOracleMidPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "midPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isValid",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPegConfig",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "oracleAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint32",
+              "name": "twapPeriod",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "maxStaleness",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxSpotDeviation",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IOraclePegFacet.PegConfig",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "removeOraclePeg",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "oracleAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint32",
+              "name": "twapPeriod",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "maxStaleness",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxSpotDeviation",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IOraclePegFacet.PegConfig",
+          "name": "config",
+          "type": "tuple"
+        }
+      ],
+      "name": "setOraclePeg",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

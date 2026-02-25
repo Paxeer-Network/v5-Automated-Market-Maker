@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibReward",
+  "sourceName": "src/core/libraries/LibReward.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212207be3e18dda569b7e1530aa1b900242100ec2221993ddf6bcde30948240e557d564736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea26469706673582212207be3e18dda569b7e1530aa1b900242100ec2221993ddf6bcde30948240e557d564736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

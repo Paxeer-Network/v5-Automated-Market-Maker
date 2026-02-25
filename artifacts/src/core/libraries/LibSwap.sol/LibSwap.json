@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibSwap",
+  "sourceName": "src/core/libraries/LibSwap.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DeadlineExpired",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InsufficientInputAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InsufficientLiquidity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InsufficientOutputAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PriceLimitReached",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAmount",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212204b5f907c0fd7ef6945e45c499fee34b5c408b1250b736c890c20005087ea63d264736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea26469706673582212204b5f907c0fd7ef6945e45c499fee34b5c408b1250b736c890c20005087ea63d264736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

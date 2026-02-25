@@ -1,0 +1,26 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibPosition",
+  "sourceName": "src/core/libraries/LibPosition.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "InsufficientLiquidity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotPositionOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PositionDoesNotExist",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220ec4aefd36a2b5f668c8ef16898580ab4a1d8d5a99358aebadbf75e2050e257d364736f6c634300081b0033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220ec4aefd36a2b5f668c8ef16898580ab4a1d8d5a99358aebadbf75e2050e257d364736f6c634300081b0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

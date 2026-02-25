@@ -1,0 +1,89 @@
+name: Release & Publish
+
+on:
+  release:
+    types: [published]
+
+env:
+  NODE_VERSION: "18"
+
+jobs:
+  publish-contracts:
+    name: Publish Contracts Package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js (GitHub Packages)
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile contracts
+        run: npm run compile
+
+      - name: Generate typechain
+        run: npm run typechain
+
+      - name: Prepare package
+        run: |
+          mkdir -p dist/abi
+          mkdir -p dist/typechain-types
+          # Extract ABIs from artifacts
+          for f in artifacts/src/**/*.sol/*.json; do
+            name=$(basename "$f" .json)
+            # Skip .dbg.json files
+            if [[ "$name" == *".dbg"* ]]; then continue; fi
+            jq '.abi' "$f" > "dist/abi/${name}.json" 2>/dev/null || true
+          done
+          # Copy typechain types
+          cp -r typechain-types/* dist/typechain-types/ 2>/dev/null || true
+          # Copy package files
+          cp contracts.package.json dist/package.json
+          cp README.md dist/
+          cp LICENSE.md dist/
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        working-directory: dist
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-sdk:
+    name: Publish SDK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js (GitHub Packages)
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install SDK dependencies
+        run: npm ci
+        working-directory: sdk
+
+      - name: Build SDK
+        run: npm run build
+        working-directory: sdk
+
+      - name: Publish SDK
+        run: npm publish
+        working-directory: sdk
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
