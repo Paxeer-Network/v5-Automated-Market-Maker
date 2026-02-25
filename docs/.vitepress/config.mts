@@ -25,7 +25,6 @@ export default defineConfig({
         {
           text: 'Getting Started',
           items: [
-            { text: 'Introduction', link: '/guide/introduction' },
             { text: 'Architecture', link: '/guide/architecture' },
             { text: 'SDK Integration', link: '/guide/sdk-integration' }
           ]

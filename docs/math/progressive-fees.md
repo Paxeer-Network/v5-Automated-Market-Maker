@@ -2,11 +2,6 @@
   <img src="https://raw.githubusercontent.com/Paxeer-Network/Paxeer-Network-Brand-Kit/7c7147e2c5349127fb07db139df0333345881524/cdn_paxeer_logo.svg" alt="Paxeer Network" width="200" />
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/License-GPL--3.0-blue.svg" alt="License" />
-  <img src="https://img.shields.io/badge/Solidity-0.8.27-363636.svg" alt="Solidity" />
-  <img src="https://img.shields.io/badge/Network-Paxeer%20(125)-green.svg" alt="Paxeer" />
-</p>
 
 # Progressive Fee Structure
 
