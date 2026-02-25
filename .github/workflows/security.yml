@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Run Slither
-        uses: crytic/slither-action@v0.4.0
+        uses: crytic/slither-action@v0.4.2
         id: slither
         with:
           sarif: results.sarif
@@ -92,7 +92,7 @@ jobs:
         run: npm ci
 
       - name: Run Slither reentrancy detectors
-        uses: crytic/slither-action@v0.4.0
+        uses: crytic/slither-action@v0.4.2
         with:
           slither-config: slither.config.json
           slither-args: --detect reentrancy-eth,reentrancy-no-eth,reentrancy-benign,reentrancy-events
