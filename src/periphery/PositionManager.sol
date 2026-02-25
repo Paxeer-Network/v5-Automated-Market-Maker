@@ -64,9 +64,7 @@ contract PositionManager is ERC721Permit, ReentrancyGuard {
     error PositionNotEmpty();
     error DeadlineExpired();
 
-    constructor(address _diamond, address _positionDescriptor)
-        ERC721Permit("v5-ASAMM Position", "v5-ASAMM-POS")
-    {
+    constructor(address _diamond, address _positionDescriptor) ERC721Permit("v5-ASAMM Position", "v5-ASAMM-POS") {
         diamond = _diamond;
         positionDescriptor = _positionDescriptor;
     }
@@ -88,7 +86,9 @@ contract PositionManager is ERC721Permit, ReentrancyGuard {
     /// @return liquidity The liquidity minted
     /// @return amount0 Token0 deposited
     /// @return amount1 Token1 deposited
-    function mint(MintParams calldata params)
+    function mint(
+        MintParams calldata params
+    )
         external
         nonReentrant
         checkDeadline(params.deadline)
@@ -124,7 +124,9 @@ contract PositionManager is ERC721Permit, ReentrancyGuard {
     /// @param params The decrease parameters
     /// @return amount0 Token0 withdrawn
     /// @return amount1 Token1 withdrawn
-    function decreaseLiquidity(DecreaseLiquidityParams calldata params)
+    function decreaseLiquidity(
+        DecreaseLiquidityParams calldata params
+    )
         external
         nonReentrant
         isAuthorized(params.tokenId)
@@ -151,20 +153,13 @@ contract PositionManager is ERC721Permit, ReentrancyGuard {
     /// @param params The collect parameters
     /// @return amount0 Token0 fees collected
     /// @return amount1 Token1 fees collected
-    function collect(CollectParams calldata params)
-        external
-        nonReentrant
-        isAuthorized(params.tokenId)
-        returns (uint256 amount0, uint256 amount1)
-    {
+    function collect(
+        CollectParams calldata params
+    ) external nonReentrant isAuthorized(params.tokenId) returns (uint256 amount0, uint256 amount1) {
         uint256 positionId = tokenToPositionId[params.tokenId];
         ILiquidityFacet.Position memory pos = ILiquidityFacet(diamond).getPosition(positionId);
 
-        (amount0, amount1) = ILiquidityFacet(diamond).collectFees(
-            pos.poolId,
-            positionId,
-            params.recipient
-        );
+        (amount0, amount1) = ILiquidityFacet(diamond).collectFees(pos.poolId, positionId, params.recipient);
     }
 
     /// @notice Burn a position NFT (only if liquidity is zero)

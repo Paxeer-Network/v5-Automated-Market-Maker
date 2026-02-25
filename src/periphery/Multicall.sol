@@ -29,11 +29,9 @@ abstract contract Multicall {
     /// @param data Array of encoded function calls
     /// @return successes Array of success flags
     /// @return results Array of return data
-    function tryMulticall(bytes[] calldata data)
-        external
-        payable
-        returns (bool[] memory successes, bytes[] memory results)
-    {
+    function tryMulticall(
+        bytes[] calldata data
+    ) external payable returns (bool[] memory successes, bytes[] memory results) {
         successes = new bool[](data.length);
         results = new bytes[](data.length);
         for (uint256 i = 0; i < data.length; i++) {

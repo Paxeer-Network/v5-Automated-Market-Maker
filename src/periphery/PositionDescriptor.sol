@@ -26,28 +26,34 @@ contract PositionDescriptor {
         // 4. Encode as base64 data URI JSON
 
         // Simplified placeholder — returns basic metadata
-        return string(abi.encodePacked(
-            'data:application/json;utf8,{"name":"v5-ASAMM Position #',
-            _toString(tokenId),
-            '","description":"v5-ASAMM LP Position","image":"data:image/svg+xml;utf8,',
-            _generateSVG(tokenId),
-            '"}'
-        ));
+        return
+            string(
+                abi.encodePacked(
+                    'data:application/json;utf8,{"name":"v5-ASAMM Position #',
+                    _toString(tokenId),
+                    '","description":"v5-ASAMM LP Position","image":"data:image/svg+xml;utf8,',
+                    _generateSVG(tokenId),
+                    '"}'
+                )
+            );
     }
 
     /// @dev Generate a simple SVG for the position
     function _generateSVG(uint256 tokenId) internal pure returns (string memory) {
-        return string(abi.encodePacked(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="290" height="500" viewBox="0 0 290 500">',
-            '<rect width="290" height="500" fill="#1a1a2e" rx="20"/>',
-            '<text x="145" y="50" font-family="monospace" font-size="16" fill="#e94560" text-anchor="middle">v5-ASAMM</text>',
-            '<text x="145" y="80" font-family="monospace" font-size="12" fill="#ffffff" text-anchor="middle">Position #',
-            _toString(tokenId),
-            '</text>',
-            '<line x1="30" y1="100" x2="260" y2="100" stroke="#333" stroke-width="1"/>',
-            '<text x="145" y="250" font-family="monospace" font-size="48" fill="#0f3460" text-anchor="middle">LP</text>',
-            '</svg>'
-        ));
+        return
+            string(
+                abi.encodePacked(
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="290" height="500" viewBox="0 0 290 500">',
+                    '<rect width="290" height="500" fill="#1a1a2e" rx="20"/>',
+                    '<text x="145" y="50" font-family="monospace" font-size="16" fill="#e94560" text-anchor="middle">v5-ASAMM</text>',
+                    '<text x="145" y="80" font-family="monospace" font-size="12" fill="#ffffff" text-anchor="middle">Position #',
+                    _toString(tokenId),
+                    "</text>",
+                    '<line x1="30" y1="100" x2="260" y2="100" stroke="#333" stroke-width="1"/>',
+                    '<text x="145" y="250" font-family="monospace" font-size="48" fill="#0f3460" text-anchor="middle">LP</text>',
+                    "</svg>"
+                )
+            );
     }
 
     /// @dev Convert uint256 to string

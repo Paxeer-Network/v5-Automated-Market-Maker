@@ -70,17 +70,17 @@ interface ILiquidityFacet {
         uint256 amount1
     );
 
-    function addLiquidity(AddLiquidityParams calldata params)
-        external
-        returns (uint256 positionId, uint128 liquidity, uint256 amount0, uint256 amount1);
+    function addLiquidity(
+        AddLiquidityParams calldata params
+    ) external returns (uint256 positionId, uint128 liquidity, uint256 amount0, uint256 amount1);
 
-    function removeLiquidity(RemoveLiquidityParams calldata params)
-        external
-        returns (uint256 amount0, uint256 amount1);
+    function removeLiquidity(RemoveLiquidityParams calldata params) external returns (uint256 amount0, uint256 amount1);
 
-    function collectFees(bytes32 poolId, uint256 positionId, address recipient)
-        external
-        returns (uint256 amount0, uint256 amount1);
+    function collectFees(
+        bytes32 poolId,
+        uint256 positionId,
+        address recipient
+    ) external returns (uint256 amount0, uint256 amount1);
 
     function getPosition(uint256 positionId) external view returns (Position memory);
 }

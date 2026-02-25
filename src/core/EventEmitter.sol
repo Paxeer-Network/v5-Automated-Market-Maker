@@ -20,12 +20,7 @@ interface IEventEmitter {
         uint256 timestamp
     );
 
-    event PoolInitializedDetailed(
-        bytes32 indexed poolId,
-        uint160 sqrtPriceX96,
-        int24 tick,
-        uint256 timestamp
-    );
+    event PoolInitializedDetailed(bytes32 indexed poolId, uint160 sqrtPriceX96, int24 tick, uint256 timestamp);
 
     // ──────────────── Swap Events ────────────────
     event SwapExecuted(
@@ -175,16 +170,19 @@ contract EventEmitter is IEventEmitter {
         }
 
         emit PoolCreatedDetailed(
-            poolId, creator, token0, token1, tickSpacing,
-            poolType, baseFee, maxImpactFee, block.timestamp
+            poolId,
+            creator,
+            token0,
+            token1,
+            tickSpacing,
+            poolType,
+            baseFee,
+            maxImpactFee,
+            block.timestamp
         );
     }
 
-    function emitPoolInitialized(
-        bytes32 poolId,
-        uint160 sqrtPriceX96,
-        int24 tick
-    ) external onlyDiamond {
+    function emitPoolInitialized(bytes32 poolId, uint160 sqrtPriceX96, int24 tick) external onlyDiamond {
         poolInfos[poolId].lastSqrtPriceX96 = sqrtPriceX96;
         poolInfos[poolId].lastTick = tick;
 
@@ -214,11 +212,19 @@ contract EventEmitter is IEventEmitter {
         if (amount1 > 0) info.totalVolume1 += uint256(amount1);
 
         emit SwapExecuted(
-            poolId, sender, recipient, zeroForOne,
-            amount0, amount1,
-            sqrtPriceX96Before, sqrtPriceX96After,
-            tickBefore, tickAfter,
-            liquidity, feeAmount, block.timestamp
+            poolId,
+            sender,
+            recipient,
+            zeroForOne,
+            amount0,
+            amount1,
+            sqrtPriceX96Before,
+            sqrtPriceX96After,
+            tickBefore,
+            tickAfter,
+            liquidity,
+            feeAmount,
+            block.timestamp
         );
     }
 
@@ -242,11 +248,18 @@ contract EventEmitter is IEventEmitter {
         }
 
         emit LiquidityAddedDetailed(
-            poolId, provider, positionId,
-            tickLower, tickUpper, liquidity,
-            amount0, amount1,
-            reserve0After, reserve1After,
-            totalLiquidityAfter, block.timestamp
+            poolId,
+            provider,
+            positionId,
+            tickLower,
+            tickUpper,
+            liquidity,
+            amount0,
+            amount1,
+            reserve0After,
+            reserve1After,
+            totalLiquidityAfter,
+            block.timestamp
         );
     }
 
@@ -262,10 +275,16 @@ contract EventEmitter is IEventEmitter {
         uint128 totalLiquidityAfter
     ) external onlyDiamond {
         emit LiquidityRemovedDetailed(
-            poolId, provider, positionId,
-            liquidityRemoved, amount0, amount1,
-            reserve0After, reserve1After,
-            totalLiquidityAfter, block.timestamp
+            poolId,
+            provider,
+            positionId,
+            liquidityRemoved,
+            amount0,
+            amount1,
+            reserve0After,
+            reserve1After,
+            totalLiquidityAfter,
+            block.timestamp
         );
     }
 
@@ -278,8 +297,12 @@ contract EventEmitter is IEventEmitter {
         uint256 protocolFees1Remaining
     ) external onlyDiamond {
         emit FeesCollectedDetailed(
-            poolId, collector, amount0, amount1,
-            protocolFees0Remaining, protocolFees1Remaining,
+            poolId,
+            collector,
+            amount0,
+            amount1,
+            protocolFees0Remaining,
+            protocolFees1Remaining,
             block.timestamp
         );
     }
@@ -295,9 +318,14 @@ contract EventEmitter is IEventEmitter {
         uint256 feeGrowthGlobal1X128
     ) external onlyDiamond {
         emit PoolSnapshot(
-            poolId, sqrtPriceX96, currentTick, liquidity,
-            reserve0, reserve1,
-            feeGrowthGlobal0X128, feeGrowthGlobal1X128,
+            poolId,
+            sqrtPriceX96,
+            currentTick,
+            liquidity,
+            reserve0,
+            reserve1,
+            feeGrowthGlobal0X128,
+            feeGrowthGlobal1X128,
             block.timestamp
         );
     }
@@ -349,33 +377,37 @@ contract EventEmitter is IEventEmitter {
     }
 
     /// @notice Get price change since last swap (cached values)
-    function getPriceChange(bytes32 poolId) external view returns (
-        uint160 currentPrice,
-        uint160 previousPrice,
-        int256 priceChangeBps
-    ) {
+    function getPriceChange(
+        bytes32 poolId
+    ) external view returns (uint160 currentPrice, uint160 previousPrice, int256 priceChangeBps) {
         PoolInfo memory info = poolInfos[poolId];
         currentPrice = info.lastSqrtPriceX96;
         previousPrice = info.previousSqrtPriceX96;
 
         if (previousPrice > 0 && currentPrice > 0) {
             if (currentPrice >= previousPrice) {
-                priceChangeBps = int256(uint256(currentPrice - previousPrice) * 10000 / uint256(previousPrice));
+                priceChangeBps = int256((uint256(currentPrice - previousPrice) * 10000) / uint256(previousPrice));
             } else {
-                priceChangeBps = -int256(uint256(previousPrice - currentPrice) * 10000 / uint256(previousPrice));
+                priceChangeBps = -int256((uint256(previousPrice - currentPrice) * 10000) / uint256(previousPrice));
             }
         }
     }
 
     /// @notice Get pool stats summary
-    function getPoolStats(bytes32 poolId) external view returns (
-        uint256 totalSwaps,
-        uint256 totalVolume0,
-        uint256 totalVolume1,
-        uint256 lpCount,
-        uint256 createdAt,
-        address creator
-    ) {
+    function getPoolStats(
+        bytes32 poolId
+    )
+        external
+        view
+        returns (
+            uint256 totalSwaps,
+            uint256 totalVolume0,
+            uint256 totalVolume1,
+            uint256 lpCount,
+            uint256 createdAt,
+            address creator
+        )
+    {
         PoolInfo memory info = poolInfos[poolId];
         return (
             info.totalSwaps,
@@ -388,12 +420,18 @@ contract EventEmitter is IEventEmitter {
     }
 
     /// @notice Get multiple pool stats in one call (for dashboards)
-    function getMultiPoolStats(bytes32[] calldata poolIds) external view returns (
-        uint256[] memory swapCounts,
-        uint256[] memory volumes0,
-        uint256[] memory volumes1,
-        uint160[] memory prices
-    ) {
+    function getMultiPoolStats(
+        bytes32[] calldata poolIds
+    )
+        external
+        view
+        returns (
+            uint256[] memory swapCounts,
+            uint256[] memory volumes0,
+            uint256[] memory volumes1,
+            uint160[] memory prices
+        )
+    {
         uint256 len = poolIds.length;
         swapCounts = new uint256[](len);
         volumes0 = new uint256[](len);

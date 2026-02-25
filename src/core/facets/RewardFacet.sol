@@ -23,11 +23,7 @@ contract RewardFacet is IRewardFacet {
         IPool.PoolState storage state = s.poolStates[pos.poolId];
         uint128 averageLiquidity = state.liquidity > 0 ? state.liquidity / 10 : 1; // Rough estimate
 
-        multiplier = LibReward.calculateLoyaltyMultiplier(
-            pos.depositTimestamp,
-            pos.liquidity,
-            averageLiquidity
-        );
+        multiplier = LibReward.calculateLoyaltyMultiplier(pos.depositTimestamp, pos.liquidity, averageLiquidity);
     }
 
     /// @inheritdoc IRewardFacet
@@ -45,13 +41,14 @@ contract RewardFacet is IRewardFacet {
             averageLiquidity
         );
 
-        return LPRewardInfo({
-            loyaltyMultiplier: multiplier,
-            accumulatedFees0: pos.tokensOwed0,
-            accumulatedFees1: pos.tokensOwed1,
-            depositTimestamp: state.depositTimestamp,
-            cumulativeVolume: state.cumulativeVolume
-        });
+        return
+            LPRewardInfo({
+                loyaltyMultiplier: multiplier,
+                accumulatedFees0: pos.tokensOwed0,
+                accumulatedFees1: pos.tokensOwed1,
+                depositTimestamp: state.depositTimestamp,
+                cumulativeVolume: state.cumulativeVolume
+            });
     }
 
     /// @inheritdoc IRewardFacet

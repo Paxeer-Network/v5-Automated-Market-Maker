@@ -1,29 +1,29 @@
-import { expect } from "chai";
-import { ethers } from "hardhat";
-import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+import { expect } from 'chai';
+import { ethers } from 'hardhat';
+import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
-describe("LibFee", function () {
+describe('LibFee', function () {
   async function deployFixture() {
-    const Factory = await ethers.getContractFactory("LibFeeTest");
+    const Factory = await ethers.getContractFactory('LibFeeTest');
     const contract = await Factory.deploy();
     return { contract };
   }
 
-  describe("calculateProgressiveFee", function () {
-    it("should return baseFee for zero-size trades", async function () {
+  describe('calculateProgressiveFee', function () {
+    it('should return baseFee for zero-size trades', async function () {
       const { contract } = await loadFixture(deployFixture);
       // baseFee=1 (0.01%), maxImpactFee=1000 (10%), tradeSize=0, liquidity=1000
       expect(await contract.calculateProgressiveFee(1, 1000, 0, 1000)).to.equal(1);
     });
 
-    it("should return baseFee for very small trades", async function () {
+    it('should return baseFee for very small trades', async function () {
       const { contract } = await loadFixture(deployFixture);
       // tradeSize=1, liquidity=1_000_000 → ratio≈0, impact≈0
       const fee = await contract.calculateProgressiveFee(1, 1000, 1, 1_000_000);
       expect(fee).to.equal(1); // Just baseFee
     });
 
-    it("should increase fee quadratically with trade size", async function () {
+    it('should increase fee quadratically with trade size', async function () {
       const { contract } = await loadFixture(deployFixture);
       // Use integer liquidity pool of 10000, trades of 100, 1000, 5000
       // ratio = tradeSize * 10000 / liquidity
@@ -43,21 +43,21 @@ describe("LibFee", function () {
       expect(feeMedium).to.be.lt(feeLarge);
     });
 
-    it("should cap fee at MAX_FEE_BPS (5000 = 50%)", async function () {
+    it('should cap fee at MAX_FEE_BPS (5000 = 50%)', async function () {
       const { contract } = await loadFixture(deployFixture);
       // Huge trade relative to pool → should cap
       const fee = await contract.calculateProgressiveFee(1, 10000, 1_000_000, 100);
       expect(fee).to.equal(5000);
     });
 
-    it("should return baseFee when pool liquidity is zero", async function () {
+    it('should return baseFee when pool liquidity is zero', async function () {
       const { contract } = await loadFixture(deployFixture);
       expect(await contract.calculateProgressiveFee(5, 1000, 100, 0)).to.equal(5);
     });
   });
 
-  describe("applyFee", function () {
-    it("should deduct correct fee amount", async function () {
+  describe('applyFee', function () {
+    it('should deduct correct fee amount', async function () {
       const { contract } = await loadFixture(deployFixture);
       const amount = 10000n;
       const feeBps = 100n; // 1%
@@ -66,7 +66,7 @@ describe("LibFee", function () {
       expect(net).to.equal(9900n);
     });
 
-    it("should handle zero fee", async function () {
+    it('should handle zero fee', async function () {
       const { contract } = await loadFixture(deployFixture);
       const [net, fee] = await contract.applyFee(1000, 0);
       expect(fee).to.equal(0);
@@ -74,8 +74,8 @@ describe("LibFee", function () {
     });
   });
 
-  describe("distributeFee", function () {
-    it("should split fees correctly (70/20/10)", async function () {
+  describe('distributeFee', function () {
+    it('should split fees correctly (70/20/10)', async function () {
       const { contract } = await loadFixture(deployFixture);
       const totalFee = 10000n;
       const [lp, protocol, trader] = await contract.distributeFee(totalFee, 7000, 2000, 1000);
@@ -84,7 +84,7 @@ describe("LibFee", function () {
       expect(trader).to.equal(1000n);
     });
 
-    it("should handle remainder correctly", async function () {
+    it('should handle remainder correctly', async function () {
       const { contract } = await loadFixture(deployFixture);
       // 333 split 70/20/10 → LP=233, Protocol=66, Trader=34 (gets remainder)
       const [lp, protocol, trader] = await contract.distributeFee(333, 7000, 2000, 1000);
@@ -92,24 +92,36 @@ describe("LibFee", function () {
     });
   });
 
-  describe("validateFeeConfig", function () {
-    it("should accept valid config", async function () {
+  describe('validateFeeConfig', function () {
+    it('should accept valid config', async function () {
       const { contract } = await loadFixture(deployFixture);
       await expect(
-        contract.validateFeeConfig({ baseFee: 1, maxImpactFee: 1000, lpShareBps: 7000, protocolShareBps: 2000, traderShareBps: 1000 })
+        contract.validateFeeConfig({
+          baseFee: 1,
+          maxImpactFee: 1000,
+          lpShareBps: 7000,
+          protocolShareBps: 2000,
+          traderShareBps: 1000,
+        }),
       ).to.not.be.reverted;
     });
 
     it("should reject if shares don't sum to 10000", async function () {
       const { contract } = await loadFixture(deployFixture);
       await expect(
-        contract.validateFeeConfig({ baseFee: 1, maxImpactFee: 1000, lpShareBps: 7000, protocolShareBps: 2000, traderShareBps: 500 })
+        contract.validateFeeConfig({
+          baseFee: 1,
+          maxImpactFee: 1000,
+          lpShareBps: 7000,
+          protocolShareBps: 2000,
+          traderShareBps: 500,
+        }),
       ).to.be.reverted;
     });
   });
 
-  describe("defaultFeeConfig", function () {
-    it("should return correct defaults", async function () {
+  describe('defaultFeeConfig', function () {
+    it('should return correct defaults', async function () {
       const { contract } = await loadFixture(deployFixture);
       const config = await contract.defaultFeeConfig();
       expect(config.baseFee).to.equal(1);

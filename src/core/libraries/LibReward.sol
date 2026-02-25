@@ -18,10 +18,10 @@ library LibReward {
     uint256 internal constant TIER_3_THRESHOLD = 180 days;
 
     // Time tier multipliers in Q128.128 (1.0x, 1.25x, 1.5x, 2.0x)
-    uint256 internal constant TIME_FACTOR_TIER_0 = Q128;                    // 1.00x
-    uint256 internal constant TIME_FACTOR_TIER_1 = Q128 + (Q128 / 4);      // 1.25x
-    uint256 internal constant TIME_FACTOR_TIER_2 = Q128 + (Q128 / 2);      // 1.50x
-    uint256 internal constant TIME_FACTOR_TIER_3 = 2 * Q128;               // 2.00x
+    uint256 internal constant TIME_FACTOR_TIER_0 = Q128; // 1.00x
+    uint256 internal constant TIME_FACTOR_TIER_1 = Q128 + (Q128 / 4); // 1.25x
+    uint256 internal constant TIME_FACTOR_TIER_2 = Q128 + (Q128 / 2); // 1.50x
+    uint256 internal constant TIME_FACTOR_TIER_3 = 2 * Q128; // 2.00x
 
     // Volume factor cap (3.0x in Q128.128)
     uint256 internal constant MAX_VOLUME_FACTOR = 3 * Q128;
@@ -96,10 +96,7 @@ library LibReward {
     /// @param swapCount Number of swaps in the epoch
     /// @param minSwaps Minimum required swaps
     /// @return qualifies Whether the trader qualifies
-    function traderQualifiesForRebate(
-        uint256 swapCount,
-        uint256 minSwaps
-    ) internal pure returns (bool qualifies) {
+    function traderQualifiesForRebate(uint256 swapCount, uint256 minSwaps) internal pure returns (bool qualifies) {
         qualifies = swapCount >= minSwaps;
     }
 

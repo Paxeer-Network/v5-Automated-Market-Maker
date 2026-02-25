@@ -5,11 +5,11 @@ pragma solidity ^0.8.27;
 /// @notice fee(x) = baseFee + impactFee * (x/L)^2
 interface IFeeFacet {
     struct FeeConfig {
-        uint256 baseFee;         // Base fee in basis points (1 = 0.01%)
-        uint256 maxImpactFee;    // Maximum impact fee in basis points
-        uint256 lpShareBps;      // LP share in basis points (7000 = 70%)
+        uint256 baseFee; // Base fee in basis points (1 = 0.01%)
+        uint256 maxImpactFee; // Maximum impact fee in basis points
+        uint256 lpShareBps; // LP share in basis points (7000 = 70%)
         uint256 protocolShareBps; // Protocol share in basis points (2000 = 20%)
-        uint256 traderShareBps;  // Trader rebate pool share (1000 = 10%)
+        uint256 traderShareBps; // Trader rebate pool share (1000 = 10%)
     }
 
     event FeeConfigUpdated(bytes32 indexed poolId, uint256 baseFee, uint256 maxImpactFee);

@@ -18,10 +18,9 @@ import "../../utils/FixedPointMath.sol";
 /// @dev Diamond facet — operates on AppStorage via delegatecall
 contract LiquidityFacet is ILiquidityFacet {
     /// @inheritdoc ILiquidityFacet
-    function addLiquidity(AddLiquidityParams calldata params)
-        external
-        returns (uint256 positionId, uint128 liquidity, uint256 amount0, uint256 amount1)
-    {
+    function addLiquidity(
+        AddLiquidityParams calldata params
+    ) external returns (uint256 positionId, uint128 liquidity, uint256 amount0, uint256 amount1) {
         LibSecurity.nonReentrantBefore();
         LibSecurity.requireNotPaused();
         LibSecurity.checkDeadline(params.deadline);
@@ -90,20 +89,26 @@ contract LiquidityFacet is ILiquidityFacet {
         );
 
         LibEventEmitter.emitLiquidityAdded(
-            params.poolId, params.recipient, positionId,
-            params.tickLower, params.tickUpper, liquidity,
-            amount0, amount1,
-            state.reserve0, state.reserve1, state.liquidity
+            params.poolId,
+            params.recipient,
+            positionId,
+            params.tickLower,
+            params.tickUpper,
+            liquidity,
+            amount0,
+            amount1,
+            state.reserve0,
+            state.reserve1,
+            state.liquidity
         );
 
         LibSecurity.nonReentrantAfter();
     }
 
     /// @inheritdoc ILiquidityFacet
-    function removeLiquidity(RemoveLiquidityParams calldata params)
-        external
-        returns (uint256 amount0, uint256 amount1)
-    {
+    function removeLiquidity(
+        RemoveLiquidityParams calldata params
+    ) external returns (uint256 amount0, uint256 amount1) {
         LibSecurity.nonReentrantBefore();
         LibSecurity.checkDeadline(params.deadline);
 
@@ -124,11 +129,7 @@ contract LiquidityFacet is ILiquidityFacet {
         require(amount1 >= params.amount1Min, "LiquidityFacet: amount1 below min");
 
         // Update fees before removing liquidity
-        LibPosition.updateFees(
-            params.positionId,
-            state.feeGrowthGlobal0X128,
-            state.feeGrowthGlobal1X128
-        );
+        LibPosition.updateFees(params.positionId, state.feeGrowthGlobal0X128, state.feeGrowthGlobal1X128);
 
         // Remove liquidity from position
         LibPosition.removeLiquidity(params.positionId, params.liquidityAmount);
@@ -157,19 +158,26 @@ contract LiquidityFacet is ILiquidityFacet {
         );
 
         LibEventEmitter.emitLiquidityRemoved(
-            params.poolId, msg.sender, params.positionId,
-            params.liquidityAmount, amount0, amount1,
-            state.reserve0, state.reserve1, state.liquidity
+            params.poolId,
+            msg.sender,
+            params.positionId,
+            params.liquidityAmount,
+            amount0,
+            amount1,
+            state.reserve0,
+            state.reserve1,
+            state.liquidity
         );
 
         LibSecurity.nonReentrantAfter();
     }
 
     /// @inheritdoc ILiquidityFacet
-    function collectFees(bytes32 poolId, uint256 positionId, address recipient)
-        external
-        returns (uint256 amount0, uint256 amount1)
-    {
+    function collectFees(
+        bytes32 poolId,
+        uint256 positionId,
+        address recipient
+    ) external returns (uint256 amount0, uint256 amount1) {
         LibSecurity.nonReentrantBefore();
 
         AppStorage storage s = LibAppStorage.appStorage();

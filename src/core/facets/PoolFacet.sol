@@ -41,8 +41,14 @@ contract PoolFacet is IPool {
 
         // Notify EventEmitter
         LibEventEmitter.emitPoolCreated(
-            poolId, msg.sender, config.token0, config.token1,
-            config.tickSpacing, config.poolType, config.baseFee, config.maxImpactFee
+            poolId,
+            msg.sender,
+            config.token0,
+            config.token1,
+            config.tickSpacing,
+            config.poolType,
+            config.baseFee,
+            config.maxImpactFee
         );
     }
 
@@ -79,11 +85,7 @@ contract PoolFacet is IPool {
     }
 
     /// @notice Compute a pool ID from parameters
-    function computePoolId(
-        address token0,
-        address token1,
-        uint24 tickSpacing
-    ) external pure returns (bytes32) {
+    function computePoolId(address token0, address token1, uint24 tickSpacing) external pure returns (bytes32) {
         return LibPool.computePoolId(token0, token1, tickSpacing);
     }
 

@@ -8,7 +8,6 @@ import "../interfaces/IPool.sol";
 /// @title LibEventEmitter — Helper for calling the EventEmitter from facets
 /// @notice All calls are fire-and-forget — if EventEmitter is not set, calls are silently skipped
 library LibEventEmitter {
-
     function _emitter() private view returns (address) {
         return LibAppStorage.appStorage().eventEmitter;
     }
@@ -26,7 +25,14 @@ library LibEventEmitter {
         address emitter = _emitter();
         if (emitter == address(0)) return;
         EventEmitter(emitter).emitPoolCreated(
-            poolId, creator, token0, token1, tickSpacing, poolType, baseFee, maxImpactFee
+            poolId,
+            creator,
+            token0,
+            token1,
+            tickSpacing,
+            poolType,
+            baseFee,
+            maxImpactFee
         );
     }
 
@@ -53,11 +59,18 @@ library LibEventEmitter {
         address emitter = _emitter();
         if (emitter == address(0)) return;
         EventEmitter(emitter).emitSwap(
-            poolId, sender, recipient, zeroForOne,
-            amount0, amount1,
-            sqrtPriceX96Before, sqrtPriceX96After,
-            tickBefore, tickAfter,
-            liquidity, feeAmount
+            poolId,
+            sender,
+            recipient,
+            zeroForOne,
+            amount0,
+            amount1,
+            sqrtPriceX96Before,
+            sqrtPriceX96After,
+            tickBefore,
+            tickAfter,
+            liquidity,
+            feeAmount
         );
     }
 
@@ -77,10 +90,16 @@ library LibEventEmitter {
         address emitter = _emitter();
         if (emitter == address(0)) return;
         EventEmitter(emitter).emitLiquidityAdded(
-            poolId, provider, positionId,
-            tickLower, tickUpper, liquidity,
-            amount0, amount1,
-            reserve0After, reserve1After,
+            poolId,
+            provider,
+            positionId,
+            tickLower,
+            tickUpper,
+            liquidity,
+            amount0,
+            amount1,
+            reserve0After,
+            reserve1After,
             totalLiquidityAfter
         );
     }
@@ -99,9 +118,14 @@ library LibEventEmitter {
         address emitter = _emitter();
         if (emitter == address(0)) return;
         EventEmitter(emitter).emitLiquidityRemoved(
-            poolId, provider, positionId,
-            liquidityRemoved, amount0, amount1,
-            reserve0After, reserve1After,
+            poolId,
+            provider,
+            positionId,
+            liquidityRemoved,
+            amount0,
+            amount1,
+            reserve0After,
+            reserve1After,
             totalLiquidityAfter
         );
     }
@@ -117,8 +141,12 @@ library LibEventEmitter {
         address emitter = _emitter();
         if (emitter == address(0)) return;
         EventEmitter(emitter).emitFeesCollected(
-            poolId, collector, amount0, amount1,
-            protocolFees0Remaining, protocolFees1Remaining
+            poolId,
+            collector,
+            amount0,
+            amount1,
+            protocolFees0Remaining,
+            protocolFees1Remaining
         );
     }
 }

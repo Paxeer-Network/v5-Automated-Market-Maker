@@ -33,10 +33,7 @@ library SqrtPriceMath {
         uint256 numerator2 = sqrtPriceBX96 - sqrtPriceAX96;
 
         if (roundUp) {
-            amount0 = _divRoundingUp(
-                FullMath.mulDivRoundingUp(numerator1, numerator2, sqrtPriceBX96),
-                sqrtPriceAX96
-            );
+            amount0 = _divRoundingUp(FullMath.mulDivRoundingUp(numerator1, numerator2, sqrtPriceBX96), sqrtPriceAX96);
         } else {
             amount0 = FullMath.mulDiv(numerator1, numerator2, sqrtPriceBX96) / sqrtPriceAX96;
         }

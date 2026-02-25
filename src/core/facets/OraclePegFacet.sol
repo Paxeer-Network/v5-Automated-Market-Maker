@@ -105,11 +105,9 @@ contract OraclePegFacet is IOraclePegFacet {
     }
 
     /// @notice Get raw oracle prices for debugging/monitoring
-    function getRawOraclePrices(bytes32 poolId) external view returns (
-        uint256 spotPrice_,
-        uint256 spotUpdatedAt,
-        uint256 twapPrice_
-    ) {
+    function getRawOraclePrices(
+        bytes32 poolId
+    ) external view returns (uint256 spotPrice_, uint256 spotUpdatedAt, uint256 twapPrice_) {
         AppStorage storage s = LibAppStorage.appStorage();
         require(s.isPeggedPool[poolId], "OraclePegFacet: not pegged");
 

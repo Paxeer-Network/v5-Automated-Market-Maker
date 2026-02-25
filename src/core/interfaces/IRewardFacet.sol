@@ -5,7 +5,7 @@ pragma solidity ^0.8.27;
 /// @notice Combined time + volume multiplier for LPs; epoch-based rebates for traders
 interface IRewardFacet {
     struct LPRewardInfo {
-        uint256 loyaltyMultiplier;     // Current multiplier (Q128.128)
+        uint256 loyaltyMultiplier; // Current multiplier (Q128.128)
         uint256 accumulatedFees0;
         uint256 accumulatedFees1;
         uint256 depositTimestamp;
@@ -21,9 +21,9 @@ interface IRewardFacet {
     }
 
     struct EpochConfig {
-        uint256 epochDuration;         // Duration in seconds (default: 7 days)
-        uint256 minSwapsForRebate;     // Minimum swaps per epoch to qualify
-        uint256 maxTradeSize;          // Max single trade size for rebate qualification (bps of pool)
+        uint256 epochDuration; // Duration in seconds (default: 7 days)
+        uint256 minSwapsForRebate; // Minimum swaps per epoch to qualify
+        uint256 maxTradeSize; // Max single trade size for rebate qualification (bps of pool)
     }
 
     event EpochAdvanced(uint256 indexed epoch, uint256 totalRebatePool0, uint256 totalRebatePool1);

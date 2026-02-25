@@ -28,10 +28,10 @@ interface IOracleFacet {
     /// @param poolId The pool identifier
     /// @param secondsAgos Array of seconds ago to query
     /// @return tickCumulatives The tick cumulative values at each point
-    function observe(bytes32 poolId, uint32[] calldata secondsAgos)
-        external
-        view
-        returns (int56[] memory tickCumulatives);
+    function observe(
+        bytes32 poolId,
+        uint32[] calldata secondsAgos
+    ) external view returns (int56[] memory tickCumulatives);
 
     /// @notice Expand the observation buffer capacity
     function increaseObservationCardinalityNext(bytes32 poolId, uint16 observationCardinalityNext) external;

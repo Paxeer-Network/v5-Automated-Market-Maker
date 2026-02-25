@@ -27,16 +27,18 @@ contract Quoter {
         bool zeroForOne,
         uint256 amountIn
     ) external returns (uint256 amountOut, uint256 fee, uint160 sqrtPriceX96After) {
-        try ISwapFacet(diamond).swap(
-            ISwapFacet.SwapParams({
-                poolId: poolId,
-                zeroForOne: zeroForOne,
-                amountSpecified: int256(amountIn),
-                sqrtPriceLimitX96: 0,
-                recipient: address(this),
-                deadline: block.timestamp + 1
-            })
-        ) returns (ISwapFacet.SwapResult memory result) {
+        try
+            ISwapFacet(diamond).swap(
+                ISwapFacet.SwapParams({
+                    poolId: poolId,
+                    zeroForOne: zeroForOne,
+                    amountSpecified: int256(amountIn),
+                    sqrtPriceLimitX96: 0,
+                    recipient: address(this),
+                    deadline: block.timestamp + 1
+                })
+            )
+        returns (ISwapFacet.SwapResult memory result) {
             amountOut = zeroForOne ? uint256(-result.amount1) : uint256(-result.amount0);
             fee = result.feeAmount;
             sqrtPriceX96After = result.sqrtPriceX96After;
@@ -63,16 +65,18 @@ contract Quoter {
         uint256 currentAmount = amountIn;
 
         for (uint256 i = 0; i < poolIds.length; i++) {
-            try ISwapFacet(diamond).swap(
-                ISwapFacet.SwapParams({
-                    poolId: poolIds[i],
-                    zeroForOne: zeroForOnes[i],
-                    amountSpecified: int256(currentAmount),
-                    sqrtPriceLimitX96: 0,
-                    recipient: address(this),
-                    deadline: block.timestamp + 1
-                })
-            ) returns (ISwapFacet.SwapResult memory result) {
+            try
+                ISwapFacet(diamond).swap(
+                    ISwapFacet.SwapParams({
+                        poolId: poolIds[i],
+                        zeroForOne: zeroForOnes[i],
+                        amountSpecified: int256(currentAmount),
+                        sqrtPriceLimitX96: 0,
+                        recipient: address(this),
+                        deadline: block.timestamp + 1
+                    })
+                )
+            returns (ISwapFacet.SwapResult memory result) {
                 currentAmount = zeroForOnes[i] ? uint256(-result.amount1) : uint256(-result.amount0);
             } catch {
                 return 0;
@@ -95,11 +99,7 @@ contract Quoter {
     /// @return sqrtPriceX96 The current sqrt price
     /// @return tick The current tick
     /// @return liquidity The current liquidity
-    function getPoolPrice(bytes32 poolId) external view returns (
-        uint160 sqrtPriceX96,
-        int24 tick,
-        uint128 liquidity
-    ) {
+    function getPoolPrice(bytes32 poolId) external view returns (uint160 sqrtPriceX96, int24 tick, uint128 liquidity) {
         // Read pool state from diamond
         // Note: This assumes the diamond exposes getPoolState through PoolFacet
         (bool success, bytes memory data) = diamond.staticcall(

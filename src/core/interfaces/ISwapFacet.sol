@@ -7,7 +7,7 @@ interface ISwapFacet {
     struct SwapParams {
         bytes32 poolId;
         bool zeroForOne;
-        int256 amountSpecified;    // Positive = exact input, negative = exact output
+        int256 amountSpecified; // Positive = exact input, negative = exact output
         uint160 sqrtPriceLimitX96; // Price limit for the swap
         address recipient;
         uint256 deadline;

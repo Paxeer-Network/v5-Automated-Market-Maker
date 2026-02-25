@@ -37,7 +37,10 @@ contract FeeFacet is IFeeFacet {
     }
 
     /// @inheritdoc IFeeFacet
-    function collectProtocolFees(bytes32 poolId, address recipient) external returns (uint256 amount0, uint256 amount1) {
+    function collectProtocolFees(
+        bytes32 poolId,
+        address recipient
+    ) external returns (uint256 amount0, uint256 amount1) {
         LibSecurity.requireOwner();
 
         AppStorage storage s = LibAppStorage.appStorage();

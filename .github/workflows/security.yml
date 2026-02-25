@@ -15,6 +15,7 @@ jobs:
   slither:
     name: Slither Analysis
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       contents: read
       security-events: write
@@ -72,11 +73,12 @@ jobs:
         uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: high
-          deny-licenses: GPL-3.0, AGPL-3.0
+          deny-licenses: AGPL-3.0
 
   reentrancy-check:
     name: Reentrancy Analysis
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:

@@ -47,14 +47,7 @@ contract OrderFacet is IOrderFacet {
         address depositToken = params.zeroForOne ? config.token0 : config.token1;
         LibTransfer.pullToken(depositToken, msg.sender, params.amount);
 
-        emit OrderPlaced(
-            orderId,
-            params.poolId,
-            msg.sender,
-            params.orderType,
-            alignedTick,
-            params.amount
-        );
+        emit OrderPlaced(orderId, params.poolId, msg.sender, params.orderType, alignedTick, params.amount);
 
         LibSecurity.nonReentrantAfter();
     }

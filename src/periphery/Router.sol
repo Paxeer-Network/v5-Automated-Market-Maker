@@ -63,12 +63,9 @@ contract Router is ReentrancyGuard {
     /// @notice Swap exact input for a single pool
     /// @param params The swap parameters
     /// @return amountOut The amount of output tokens received
-    function exactInputSingle(ExactInputSingleParams calldata params)
-        external
-        nonReentrant
-        checkDeadline(params.deadline)
-        returns (uint256 amountOut)
-    {
+    function exactInputSingle(
+        ExactInputSingleParams calldata params
+    ) external nonReentrant checkDeadline(params.deadline) returns (uint256 amountOut) {
         // Transfer tokens from user to this contract
         address(IERC20(address(0))); // Type hint
         _pullTokens(params.zeroForOne, params.poolId, msg.sender, params.amountIn);
@@ -96,12 +93,9 @@ contract Router is ReentrancyGuard {
     /// @notice Swap exact input through multiple pools (multi-hop)
     /// @param params The multi-hop swap parameters
     /// @return amountOut The final output amount
-    function exactInput(ExactInputParams calldata params)
-        external
-        nonReentrant
-        checkDeadline(params.deadline)
-        returns (uint256 amountOut)
-    {
+    function exactInput(
+        ExactInputParams calldata params
+    ) external nonReentrant checkDeadline(params.deadline) returns (uint256 amountOut) {
         if (params.poolIds.length == 0 || params.poolIds.length != params.zeroForOnes.length) {
             revert InvalidPath();
         }
@@ -133,12 +127,9 @@ contract Router is ReentrancyGuard {
     /// @notice Swap for exact output from a single pool
     /// @param params The swap parameters
     /// @return amountIn The amount of input tokens spent
-    function exactOutputSingle(ExactOutputSingleParams calldata params)
-        external
-        nonReentrant
-        checkDeadline(params.deadline)
-        returns (uint256 amountIn)
-    {
+    function exactOutputSingle(
+        ExactOutputSingleParams calldata params
+    ) external nonReentrant checkDeadline(params.deadline) returns (uint256 amountIn) {
         ISwapFacet.SwapParams memory swapParams = ISwapFacet.SwapParams({
             poolId: params.poolId,
             zeroForOne: params.zeroForOne,

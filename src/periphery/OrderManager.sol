@@ -51,12 +51,9 @@ contract OrderManager is ReentrancyGuard {
     /// @notice Place a limit order
     /// @param params The limit order parameters
     /// @return orderId The created order ID
-    function placeLimitOrder(PlaceLimitOrderParams calldata params)
-        external
-        nonReentrant
-        checkDeadline(params.deadline)
-        returns (uint256 orderId)
-    {
+    function placeLimitOrder(
+        PlaceLimitOrderParams calldata params
+    ) external nonReentrant checkDeadline(params.deadline) returns (uint256 orderId) {
         IOrderFacet.PlaceOrderParams memory orderParams = IOrderFacet.PlaceOrderParams({
             poolId: params.poolId,
             orderType: IOrderFacet.OrderType.Limit,
@@ -74,12 +71,9 @@ contract OrderManager is ReentrancyGuard {
     /// @notice Place a stop order
     /// @param params The stop order parameters
     /// @return orderId The created order ID
-    function placeStopOrder(PlaceStopOrderParams calldata params)
-        external
-        nonReentrant
-        checkDeadline(params.deadline)
-        returns (uint256 orderId)
-    {
+    function placeStopOrder(
+        PlaceStopOrderParams calldata params
+    ) external nonReentrant checkDeadline(params.deadline) returns (uint256 orderId) {
         IOrderFacet.PlaceOrderParams memory orderParams = IOrderFacet.PlaceOrderParams({
             poolId: params.poolId,
             orderType: IOrderFacet.OrderType.Stop,

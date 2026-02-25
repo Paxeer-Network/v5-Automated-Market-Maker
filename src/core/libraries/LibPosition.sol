@@ -90,16 +90,8 @@ library LibPosition {
 
         // Calculate newly accrued fees
         unchecked {
-            tokensOwed0 = FullMath.mulDiv(
-                feeGrowthInside0X128 - pos.feeGrowthInside0LastX128,
-                pos.liquidity,
-                1 << 128
-            );
-            tokensOwed1 = FullMath.mulDiv(
-                feeGrowthInside1X128 - pos.feeGrowthInside1LastX128,
-                pos.liquidity,
-                1 << 128
-            );
+            tokensOwed0 = FullMath.mulDiv(feeGrowthInside0X128 - pos.feeGrowthInside0LastX128, pos.liquidity, 1 << 128);
+            tokensOwed1 = FullMath.mulDiv(feeGrowthInside1X128 - pos.feeGrowthInside1LastX128, pos.liquidity, 1 << 128);
         }
 
         // Update checkpoints

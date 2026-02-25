@@ -23,11 +23,10 @@ contract OracleFacet is IOracleFacet {
     }
 
     /// @inheritdoc IOracleFacet
-    function observe(bytes32 poolId, uint32[] calldata secondsAgos)
-        external
-        view
-        returns (int56[] memory tickCumulatives)
-    {
+    function observe(
+        bytes32 poolId,
+        uint32[] calldata secondsAgos
+    ) external view returns (int56[] memory tickCumulatives) {
         tickCumulatives = LibOracle.observe(poolId, secondsAgos);
     }
 
@@ -37,11 +36,9 @@ contract OracleFacet is IOracleFacet {
     }
 
     /// @notice Get oracle state for a pool
-    function getOracleState(bytes32 poolId) external view returns (
-        uint16 index,
-        uint16 cardinality,
-        uint16 cardinalityNext
-    ) {
+    function getOracleState(
+        bytes32 poolId
+    ) external view returns (uint16 index, uint16 cardinality, uint16 cardinalityNext) {
         AppStorage storage s = LibAppStorage.appStorage();
         OracleState storage state = s.oracleStates[poolId];
         index = state.index;

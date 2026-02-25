@@ -21,10 +21,7 @@ library LibOrder {
     /// @param poolId The pool identifier
     /// @param params The order parameters
     /// @return orderId The newly created order ID
-    function placeOrder(
-        bytes32 poolId,
-        IOrderFacet.PlaceOrderParams memory params
-    ) internal returns (uint256 orderId) {
+    function placeOrder(bytes32 poolId, IOrderFacet.PlaceOrderParams memory params) internal returns (uint256 orderId) {
         AppStorage storage s = LibAppStorage.appStorage();
 
         // Validate constraints
@@ -65,8 +62,7 @@ library LibOrder {
 
         if (order.orderId == 0) revert OrderDoesNotExist();
         if (order.owner != msg.sender) revert NotOrderOwner();
-        if (order.status != IOrderFacet.OrderStatus.Active &&
-            order.status != IOrderFacet.OrderStatus.PartiallyFilled) {
+        if (order.status != IOrderFacet.OrderStatus.Active && order.status != IOrderFacet.OrderStatus.PartiallyFilled) {
             revert OrderNotActive();
         }
 
@@ -95,8 +91,10 @@ library LibOrder {
             uint256 oid = bucket.orderIds[i];
             IOrderFacet.Order storage order = s.orders[oid];
 
-            if (order.status == IOrderFacet.OrderStatus.Active ||
-                order.status == IOrderFacet.OrderStatus.PartiallyFilled) {
+            if (
+                order.status == IOrderFacet.OrderStatus.Active ||
+                order.status == IOrderFacet.OrderStatus.PartiallyFilled
+            ) {
                 if (block.timestamp <= order.expiry) {
                     count++;
                     total += order.amountTotal - order.amountFilled;
@@ -111,8 +109,10 @@ library LibOrder {
             uint256 oid = bucket.orderIds[i];
             IOrderFacet.Order storage order = s.orders[oid];
 
-            if (order.status == IOrderFacet.OrderStatus.Active ||
-                order.status == IOrderFacet.OrderStatus.PartiallyFilled) {
+            if (
+                order.status == IOrderFacet.OrderStatus.Active ||
+                order.status == IOrderFacet.OrderStatus.PartiallyFilled
+            ) {
                 if (block.timestamp <= order.expiry) {
                     orderIdsToFill[idx++] = oid;
                 }
@@ -151,9 +151,10 @@ library LibOrder {
             uint256 oid = bucket.orderIds[i];
             IOrderFacet.Order storage order = s.orders[oid];
 
-            if ((order.status == IOrderFacet.OrderStatus.Active ||
-                 order.status == IOrderFacet.OrderStatus.PartiallyFilled) &&
-                block.timestamp > order.expiry) {
+            if (
+                (order.status == IOrderFacet.OrderStatus.Active ||
+                    order.status == IOrderFacet.OrderStatus.PartiallyFilled) && block.timestamp > order.expiry
+            ) {
                 order.status = IOrderFacet.OrderStatus.Expired;
                 s.activeOrderCounts[poolId]--;
                 expiredCount++;
@@ -164,8 +165,10 @@ library LibOrder {
         while (bucket.headIndex < bucket.orderIds.length) {
             uint256 oid = bucket.orderIds[bucket.headIndex];
             IOrderFacet.Order storage order = s.orders[oid];
-            if (order.status == IOrderFacet.OrderStatus.Active ||
-                order.status == IOrderFacet.OrderStatus.PartiallyFilled) {
+            if (
+                order.status == IOrderFacet.OrderStatus.Active ||
+                order.status == IOrderFacet.OrderStatus.PartiallyFilled
+            ) {
                 break;
             }
             bucket.headIndex++;
@@ -180,8 +183,10 @@ library LibOrder {
         uint256 count = 0;
         for (uint256 i = bucket.headIndex; i < bucket.orderIds.length; i++) {
             IOrderFacet.Order storage order = s.orders[bucket.orderIds[i]];
-            if (order.status == IOrderFacet.OrderStatus.Active ||
-                order.status == IOrderFacet.OrderStatus.PartiallyFilled) {
+            if (
+                order.status == IOrderFacet.OrderStatus.Active ||
+                order.status == IOrderFacet.OrderStatus.PartiallyFilled
+            ) {
                 count++;
             }
         }
@@ -190,8 +195,10 @@ library LibOrder {
         uint256 idx = 0;
         for (uint256 i = bucket.headIndex; i < bucket.orderIds.length; i++) {
             IOrderFacet.Order storage order = s.orders[bucket.orderIds[i]];
-            if (order.status == IOrderFacet.OrderStatus.Active ||
-                order.status == IOrderFacet.OrderStatus.PartiallyFilled) {
+            if (
+                order.status == IOrderFacet.OrderStatus.Active ||
+                order.status == IOrderFacet.OrderStatus.PartiallyFilled
+            ) {
                 result[idx++] = bucket.orderIds[i];
             }
         }

@@ -18,11 +18,7 @@ library LibPool {
 
     /// @notice Compute the deterministic pool ID from token pair and tick spacing
     /// @dev Tokens are sorted so poolId is order-independent
-    function computePoolId(
-        address token0,
-        address token1,
-        uint24 tickSpacing
-    ) internal pure returns (bytes32) {
+    function computePoolId(address token0, address token1, uint24 tickSpacing) internal pure returns (bytes32) {
         (address t0, address t1) = sortTokens(token0, token1);
         return keccak256(abi.encodePacked(t0, t1, tickSpacing));
     }
@@ -55,9 +51,7 @@ library LibPool {
     }
 
     /// @notice Create a new pool (does not initialize it)
-    function createPool(
-        IPool.PoolConfig memory config
-    ) internal returns (bytes32 poolId) {
+    function createPool(IPool.PoolConfig memory config) internal returns (bytes32 poolId) {
         AppStorage storage s = LibAppStorage.appStorage();
 
         (config.token0, config.token1) = sortTokens(config.token0, config.token1);

@@ -89,11 +89,11 @@ library LibFee {
     /// @return config The default fee config
     function defaultFeeConfig() internal pure returns (IFeeFacet.FeeConfig memory config) {
         config = IFeeFacet.FeeConfig({
-            baseFee: 1,              // 0.01%
-            maxImpactFee: 1000,      // 10% max impact fee
-            lpShareBps: 7000,        // 70%
-            protocolShareBps: 2000,  // 20%
-            traderShareBps: 1000     // 10%
+            baseFee: 1, // 0.01%
+            maxImpactFee: 1000, // 10% max impact fee
+            lpShareBps: 7000, // 70%
+            protocolShareBps: 2000, // 20%
+            traderShareBps: 1000 // 10%
         });
     }
 }

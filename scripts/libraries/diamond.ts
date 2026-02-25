@@ -1,5 +1,5 @@
-import { ethers } from "hardhat";
-import { Contract, ContractFactory } from "ethers";
+import { ethers } from 'hardhat';
+import { Contract, ContractFactory } from 'ethers';
 
 export interface FacetCut {
   facetAddress: string;
@@ -21,7 +21,7 @@ export function getSelectors(contract: Contract): string[] {
   const fragments = contract.interface.fragments;
 
   for (const fragment of fragments) {
-    if (fragment.type === "function") {
+    if (fragment.type === 'function') {
       const selector = contract.interface.getFunction(fragment.name)?.selector;
       if (selector) {
         selectors.push(selector);
@@ -35,15 +35,12 @@ export function getSelectors(contract: Contract): string[] {
 /**
  * Get selectors excluding specific function names
  */
-export function getSelectorsExcept(
-  contract: Contract,
-  excludeNames: string[]
-): string[] {
+export function getSelectorsExcept(contract: Contract, excludeNames: string[]): string[] {
   const selectors: string[] = [];
   const fragments = contract.interface.fragments;
 
   for (const fragment of fragments) {
-    if (fragment.type === "function" && !excludeNames.includes(fragment.name)) {
+    if (fragment.type === 'function' && !excludeNames.includes(fragment.name)) {
       const selector = contract.interface.getFunction(fragment.name)?.selector;
       if (selector) {
         selectors.push(selector);
@@ -57,9 +54,7 @@ export function getSelectorsExcept(
 /**
  * Build FacetCut array for adding facets to the Diamond
  */
-export function buildFacetCuts(
-  facets: { name: string; contract: Contract }[]
-): FacetCut[] {
+export function buildFacetCuts(facets: { name: string; contract: Contract }[]): FacetCut[] {
   return facets.map((facet) => ({
     facetAddress: facet.contract.target as string,
     action: FacetCutAction.Add,
@@ -83,21 +78,21 @@ export async function deployDiamond(
     epochDuration: number;
     minSwapsForRebate: number;
     maxTradeSizeBps: number;
-  }
+  },
 ): Promise<{
   diamond: Contract;
   facets: Record<string, Contract>;
 }> {
-  console.log("Deploying Diamond...\n");
+  console.log('Deploying Diamond...\n');
 
   // Deploy DiamondCutFacet first
-  const DiamondCutFacet = await ethers.getContractFactory("DiamondCutFacet");
+  const DiamondCutFacet = await ethers.getContractFactory('DiamondCutFacet');
   const diamondCutFacet = await DiamondCutFacet.deploy();
   await diamondCutFacet.waitForDeployment();
   console.log(`  DiamondCutFacet deployed: ${diamondCutFacet.target}`);
 
   // Deploy Diamond
-  const Diamond = await ethers.getContractFactory("Diamond");
+  const Diamond = await ethers.getContractFactory('Diamond');
   const diamond = await Diamond.deploy(owner, diamondCutFacet.target);
   await diamond.waitForDeployment();
   console.log(`  Diamond deployed: ${diamond.target}`);
@@ -109,7 +104,7 @@ export async function deployDiamond(
   const facetCuts: FacetCut[] = [];
 
   for (const facetName of facetNames) {
-    if (facetName === "DiamondCutFacet") continue; // Already deployed
+    if (facetName === 'DiamondCutFacet') continue; // Already deployed
 
     const FacetFactory = await ethers.getContractFactory(facetName);
     const facet = await FacetFactory.deploy();
@@ -126,26 +121,17 @@ export async function deployDiamond(
   }
 
   // Deploy InitDiamond
-  const InitDiamond = await ethers.getContractFactory("InitDiamond");
+  const InitDiamond = await ethers.getContractFactory('InitDiamond');
   const initDiamond = await InitDiamond.deploy();
   await initDiamond.waitForDeployment();
   console.log(`  InitDiamond deployed: ${initDiamond.target}`);
 
   // Execute diamond cut with initialization
-  const diamondCut = await ethers.getContractAt(
-    "IDiamondCut",
-    diamond.target as string
-  );
+  const diamondCut = await ethers.getContractAt('IDiamondCut', diamond.target as string);
 
-  const initCalldata = initDiamond.interface.encodeFunctionData("init", [
-    initArgs,
-  ]);
+  const initCalldata = initDiamond.interface.encodeFunctionData('init', [initArgs]);
 
-  const tx = await diamondCut.diamondCut(
-    facetCuts,
-    initDiamond.target,
-    initCalldata
-  );
+  const tx = await diamondCut.diamondCut(facetCuts, initDiamond.target, initCalldata);
   await tx.wait();
   console.log(`\n  Diamond cut executed (${facetCuts.length} facets added)`);
 

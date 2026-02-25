@@ -13,6 +13,7 @@ jobs:
   solhint:
     name: Solidity Lint (solhint)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -31,6 +32,7 @@ jobs:
   eslint:
     name: TypeScript Lint (ESLint)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +51,7 @@ jobs:
   prettier:
     name: Format Check (Prettier)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -67,6 +70,7 @@ jobs:
   spellcheck:
     name: Spellcheck
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 

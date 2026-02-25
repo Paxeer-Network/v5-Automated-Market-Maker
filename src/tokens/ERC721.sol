@@ -99,7 +99,7 @@ contract ERC721 is IERC165 {
         return
             interfaceId == 0x01ffc9a7 || // ERC165
             interfaceId == 0x80ac58cd || // ERC721
-            interfaceId == 0x5b5e139f;   // ERC721Metadata
+            interfaceId == 0x5b5e139f; // ERC721Metadata
     }
 
     // --- Internal ---

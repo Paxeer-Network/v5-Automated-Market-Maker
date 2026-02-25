@@ -5,10 +5,10 @@ pragma solidity ^0.8.27;
 /// @notice Connects external oracle feeds to pegged pools for wrapped assets
 interface IOraclePegFacet {
     struct PegConfig {
-        address oracleAddress;      // IASAMMOracle implementation
-        uint32 twapPeriod;          // TWAP lookback period in seconds
-        uint32 maxStaleness;        // Max seconds before oracle is considered stale
-        uint256 maxSpotDeviation;   // Max % deviation between spot and TWAP (basis points)
+        address oracleAddress; // IASAMMOracle implementation
+        uint32 twapPeriod; // TWAP lookback period in seconds
+        uint32 maxStaleness; // Max seconds before oracle is considered stale
+        uint256 maxSpotDeviation; // Max % deviation between spot and TWAP (basis points)
     }
 
     event OraclePegSet(bytes32 indexed poolId, address indexed oracle, uint32 twapPeriod, uint32 maxStaleness);

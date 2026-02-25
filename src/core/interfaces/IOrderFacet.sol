@@ -22,12 +22,12 @@ interface IOrderFacet {
         bytes32 poolId;
         address owner;
         OrderType orderType;
-        bool zeroForOne;          // Direction: true = sell token0 for token1
-        int24 targetTick;         // Tick at which the order executes
-        uint256 amountTotal;      // Total amount to trade
-        uint256 amountFilled;     // Amount already filled
-        uint256 depositTimestamp;  // When the order was placed
-        uint256 expiry;           // Expiration timestamp (0 = no expiry)
+        bool zeroForOne; // Direction: true = sell token0 for token1
+        int24 targetTick; // Tick at which the order executes
+        uint256 amountTotal; // Total amount to trade
+        uint256 amountFilled; // Amount already filled
+        uint256 depositTimestamp; // When the order was placed
+        uint256 expiry; // Expiration timestamp (0 = no expiry)
         OrderStatus status;
     }
 
@@ -37,7 +37,7 @@ interface IOrderFacet {
         bool zeroForOne;
         int24 targetTick;
         uint256 amount;
-        uint256 expiry;           // 0 for default TTL
+        uint256 expiry; // 0 for default TTL
     }
 
     event OrderPlaced(

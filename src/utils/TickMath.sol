@@ -207,7 +207,11 @@ library TickMath {
             int24 tickLow = int24((log_sqrt10001 - 3402992956809132418596140100660247210) >> 128);
             int24 tickHi = int24((log_sqrt10001 + 291339464771989622907027621153398088495) >> 128);
 
-            tick = tickLow == tickHi ? tickLow : getSqrtPriceAtTick(tickHi) <= sqrtPriceX96 ? tickHi : tickLow;
+            tick = tickLow == tickHi
+                ? tickLow
+                : getSqrtPriceAtTick(tickHi) <= sqrtPriceX96
+                    ? tickHi
+                    : tickLow;
         }
     }
 
@@ -217,7 +221,7 @@ library TickMath {
     /// @return The aligned tick
     function nearestUsableTick(int24 tick, int24 tickSpacing) internal pure returns (int24) {
         require(tickSpacing > 0, "TickMath: spacing must be positive");
-        int24 rounded = tick / tickSpacing * tickSpacing;
+        int24 rounded = (tick / tickSpacing) * tickSpacing;
         if (tick < 0 && tick % tickSpacing != 0) rounded -= tickSpacing;
         return rounded;
     }

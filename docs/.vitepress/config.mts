@@ -4,6 +4,9 @@ export default defineConfig({
   title: 'v5-ASAMM Protocol',
   description: 'Adaptive Sigmoid Automated Market Maker - Documentation',
   base: '/',
+  ignoreDeadLinks: [
+    /\/LICENSE/
+  ],
   themeConfig: {
     logo: '/logo.svg',
     nav: [

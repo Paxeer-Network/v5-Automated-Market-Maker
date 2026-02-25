@@ -5,7 +5,7 @@ pragma solidity ^0.8.27;
 /// @notice Defines pool configuration and state types used across the protocol
 interface IPool {
     enum PoolType {
-        Standard,   // Reserve-derived P_mid
+        Standard, // Reserve-derived P_mid
         OraclePegged // Oracle-anchored P_mid
     }
 
@@ -14,10 +14,10 @@ interface IPool {
         address token1;
         PoolType poolType;
         uint24 tickSpacing;
-        uint256 sigmoidAlpha;    // Steepness parameter (Q128.128)
-        uint256 sigmoidK;        // Max deviation factor (Q128.128)
-        uint256 baseFee;         // Base fee in basis points (e.g., 1 = 0.01%)
-        uint256 maxImpactFee;    // Max impact fee in basis points
+        uint256 sigmoidAlpha; // Steepness parameter (Q128.128)
+        uint256 sigmoidK; // Max deviation factor (Q128.128)
+        uint256 baseFee; // Base fee in basis points (e.g., 1 = 0.01%)
+        uint256 maxImpactFee; // Max impact fee in basis points
     }
 
     struct PoolState {

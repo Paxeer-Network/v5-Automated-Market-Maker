@@ -16,12 +16,7 @@ contract FlashLoanFacet is IFlashLoanFacet {
     uint256 internal constant BPS = 10_000;
 
     /// @inheritdoc IFlashLoanFacet
-    function flashLoan(
-        address receiver,
-        address token,
-        uint256 amount,
-        bytes calldata data
-    ) external {
+    function flashLoan(address receiver, address token, uint256 amount, bytes calldata data) external {
         LibSecurity.nonReentrantBefore();
         LibSecurity.requireNotPaused();
 

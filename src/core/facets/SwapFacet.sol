@@ -44,9 +44,7 @@ contract SwapFacet is ISwapFacet {
         // Determine price limit
         uint160 sqrtPriceLimitX96 = params.sqrtPriceLimitX96;
         if (sqrtPriceLimitX96 == 0) {
-            sqrtPriceLimitX96 = params.zeroForOne
-                ? TickMath.MIN_SQRT_PRICE + 1
-                : TickMath.MAX_SQRT_PRICE - 1;
+            sqrtPriceLimitX96 = params.zeroForOne ? TickMath.MIN_SQRT_PRICE + 1 : TickMath.MAX_SQRT_PRICE - 1;
         }
 
         // Validate price limit direction
@@ -68,9 +66,7 @@ contract SwapFacet is ISwapFacet {
             sqrtPriceX96: state.sqrtPriceX96,
             tick: state.currentTick,
             liquidity: state.liquidity,
-            feeGrowthGlobalX128: params.zeroForOne
-                ? state.feeGrowthGlobal0X128
-                : state.feeGrowthGlobal1X128,
+            feeGrowthGlobalX128: params.zeroForOne ? state.feeGrowthGlobal0X128 : state.feeGrowthGlobal1X128,
             totalFees: 0
         });
 
@@ -122,9 +118,7 @@ contract SwapFacet is ISwapFacet {
 
             // Accumulate fee growth
             if (swapState.liquidity > 0 && step.feeAmount > 0) {
-                swapState.feeGrowthGlobalX128 += FullMath.mulDiv(
-                    step.feeAmount, Q128, swapState.liquidity
-                );
+                swapState.feeGrowthGlobalX128 += FullMath.mulDiv(step.feeAmount, Q128, swapState.liquidity);
             }
             swapState.totalFees += step.feeAmount;
 
@@ -251,7 +245,7 @@ contract SwapFacet is ISwapFacet {
             params.zeroForOne,
             amount0,
             amount1,
-            state.sqrtPriceX96,  // already updated — use result
+            state.sqrtPriceX96, // already updated — use result
             swapState.sqrtPriceX96,
             state.currentTick,
             swapState.tick,
@@ -294,7 +288,7 @@ contract SwapFacet is ISwapFacet {
                 : SqrtPriceMath.getAmount1Delta(step.sqrtPriceStartX96, sqrtPriceTargetX96, swapState.liquidity, true);
 
             // Apply fee to determine usable input
-            (uint256 amountInAfterFee,) = LibFee.applyFee(amountSpecifiedAbs, feeBps);
+            (uint256 amountInAfterFee, ) = LibFee.applyFee(amountSpecifiedAbs, feeBps);
 
             if (amountInAfterFee >= amountInMax) {
                 // Fills the entire range to the target tick
@@ -304,14 +298,27 @@ contract SwapFacet is ISwapFacet {
                 // Partially fills — compute new price
                 step.amountIn = amountInAfterFee;
                 swapState.sqrtPriceX96 = SqrtPriceMath.getNextSqrtPriceFromInput(
-                    step.sqrtPriceStartX96, swapState.liquidity, amountInAfterFee, zeroForOne
+                    step.sqrtPriceStartX96,
+                    swapState.liquidity,
+                    amountInAfterFee,
+                    zeroForOne
                 );
             }
 
             // Compute output for this step
             step.amountOut = zeroForOne
-                ? SqrtPriceMath.getAmount1Delta(swapState.sqrtPriceX96, step.sqrtPriceStartX96, swapState.liquidity, false)
-                : SqrtPriceMath.getAmount0Delta(step.sqrtPriceStartX96, swapState.sqrtPriceX96, swapState.liquidity, false);
+                ? SqrtPriceMath.getAmount1Delta(
+                    swapState.sqrtPriceX96,
+                    step.sqrtPriceStartX96,
+                    swapState.liquidity,
+                    false
+                )
+                : SqrtPriceMath.getAmount0Delta(
+                    step.sqrtPriceStartX96,
+                    swapState.sqrtPriceX96,
+                    swapState.liquidity,
+                    false
+                );
 
             // Apply sigmoid reduction to output if pool uses sigmoid curve
             if (!isPegged && config.sigmoidK > 0 && swapState.liquidity > 0) {
@@ -344,13 +351,26 @@ contract SwapFacet is ISwapFacet {
             } else {
                 step.amountOut = amountSpecifiedAbs;
                 swapState.sqrtPriceX96 = SqrtPriceMath.getNextSqrtPriceFromOutput(
-                    step.sqrtPriceStartX96, swapState.liquidity, amountSpecifiedAbs, zeroForOne
+                    step.sqrtPriceStartX96,
+                    swapState.liquidity,
+                    amountSpecifiedAbs,
+                    zeroForOne
                 );
             }
 
             step.amountIn = zeroForOne
-                ? SqrtPriceMath.getAmount0Delta(swapState.sqrtPriceX96, step.sqrtPriceStartX96, swapState.liquidity, true)
-                : SqrtPriceMath.getAmount1Delta(step.sqrtPriceStartX96, swapState.sqrtPriceX96, swapState.liquidity, true);
+                ? SqrtPriceMath.getAmount0Delta(
+                    swapState.sqrtPriceX96,
+                    step.sqrtPriceStartX96,
+                    swapState.liquidity,
+                    true
+                )
+                : SqrtPriceMath.getAmount1Delta(
+                    step.sqrtPriceStartX96,
+                    swapState.sqrtPriceX96,
+                    swapState.liquidity,
+                    true
+                );
 
             step.feeAmount = FullMath.mulDiv(step.amountIn, feeBps, 10_000);
 
@@ -360,12 +380,7 @@ contract SwapFacet is ISwapFacet {
     }
 
     /// @dev Execute pending limit orders at a crossed tick
-    function _executeOrdersAtTick(
-        AppStorage storage s,
-        bytes32 poolId,
-        int24 tick,
-        bool zeroForOne
-    ) internal {
+    function _executeOrdersAtTick(AppStorage storage s, bytes32 poolId, int24 tick, bool zeroForOne) internal {
         OrderBucket storage bucket = s.orderBuckets[poolId][tick];
         uint256 head = bucket.headIndex;
         uint256 len = bucket.orderIds.length;

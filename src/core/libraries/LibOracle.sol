@@ -24,11 +24,7 @@ library LibOracle {
             initialized: true
         });
 
-        s.oracleStates[poolId] = OracleState({
-            index: 0,
-            cardinality: 1,
-            cardinalityNext: 1
-        });
+        s.oracleStates[poolId] = OracleState({ index: 0, cardinality: 1, cardinalityNext: 1 });
     }
 
     /// @notice Write a new observation to the ring buffer
@@ -135,12 +131,7 @@ library LibOracle {
 
         for (uint256 i = 0; i < secondsAgos.length; i++) {
             uint32 targetTime = uint32(block.timestamp) - secondsAgos[i];
-            (int56 tickCumulative, ) = _observeAt(
-                s.observations[poolId],
-                state.index,
-                state.cardinality,
-                targetTime
-            );
+            (int56 tickCumulative, ) = _observeAt(s.observations[poolId], state.index, state.cardinality, targetTime);
             tickCumulatives[i] = tickCumulative;
         }
     }
@@ -175,10 +166,7 @@ library LibOracle {
                     // Interpolate between beforeOrAt and target
                     uint32 delta = target - beforeOrAt.blockTimestamp;
                     // Use last known tick for interpolation
-                    return (
-                        beforeOrAt.tickCumulative,
-                        beforeOrAt.secondsPerLiquidityCumulativeX128
-                    );
+                    return (beforeOrAt.tickCumulative, beforeOrAt.secondsPerLiquidityCumulativeX128);
                 }
                 l = mid + 1;
             } else {

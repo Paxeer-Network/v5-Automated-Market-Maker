@@ -66,9 +66,9 @@ struct TraderRewardState {
 struct EpochState {
     uint256 currentEpoch;
     uint256 epochStartTime;
-    uint256 epochDuration;         // Default 7 days
-    uint256 minSwapsForRebate;     // Min swaps to qualify
-    uint256 maxTradeSizeBps;       // Max trade size for rebate (bps of pool)
+    uint256 epochDuration; // Default 7 days
+    uint256 minSwapsForRebate; // Min swaps to qualify
+    uint256 maxTradeSizeBps; // Max trade size for rebate (bps of pool)
     uint256 totalRebatePool0;
     uint256 totalRebatePool1;
 }
@@ -80,50 +80,40 @@ struct AppStorage {
     mapping(bytes32 => IFeeFacet.FeeConfig) feeConfigs;
     bytes32[] poolIds;
     uint256 poolCount;
-
     // ──────────────── Tick State ────────────────
     mapping(bytes32 => mapping(int24 => TickInfo)) ticks;
     mapping(bytes32 => mapping(int16 => uint256)) tickBitmaps;
-
     // ──────────────── Position State ────────────────
     mapping(uint256 => ILiquidityFacet.Position) positions;
     uint256 nextPositionId;
-
     // ──────────────── Order Book State ────────────────
     mapping(uint256 => IOrderFacet.Order) orders;
     mapping(bytes32 => mapping(int24 => OrderBucket)) orderBuckets;
     mapping(bytes32 => uint256) activeOrderCounts;
     uint256 nextOrderId;
     uint256 maxOrdersPerPool;
-    uint256 defaultOrderTTL;       // Default: 30 days
+    uint256 defaultOrderTTL; // Default: 30 days
     uint256 minOrderSize;
-    uint256 keeperBountyBps;       // Keeper bounty in bps (1 = 0.01%)
-
+    uint256 keeperBountyBps; // Keeper bounty in bps (1 = 0.01%)
     // ──────────────── Oracle State (Internal TWAP) ────────────────
     mapping(bytes32 => Observation[65535]) observations;
     mapping(bytes32 => OracleState) oracleStates;
-
     // ──────────────── Oracle Peg State ────────────────
     mapping(bytes32 => IOraclePegFacet.PegConfig) pegConfigs;
     mapping(bytes32 => bool) isPeggedPool;
-
     // ──────────────── Reward State ────────────────
-    mapping(uint256 => LPRewardState) lpRewards;        // positionId => state
+    mapping(uint256 => LPRewardState) lpRewards; // positionId => state
     mapping(bytes32 => mapping(address => TraderRewardState)) traderRewards; // poolId => trader => state
     EpochState epochState;
-
     // ──────────────── Flash Loan State ────────────────
-    uint256 flashLoanFeeBps;       // Default: 9 (0.09%)
-
+    uint256 flashLoanFeeBps; // Default: 9 (0.09%)
     // ──────────────── Protocol State ────────────────
     address treasury;
     bool paused;
     mapping(address => bool) pauseGuardians;
-
     // ──────────────── Pool Factory State ────────────────
-    mapping(bytes32 => address) poolCreators;   // poolId => creator address
-    address eventEmitter;                        // Protocol EventEmitter contract
-
+    mapping(bytes32 => address) poolCreators; // poolId => creator address
+    address eventEmitter; // Protocol EventEmitter contract
     // ──────────────── Reentrancy Guard ────────────────
     uint256 reentrancyStatus;
 }
